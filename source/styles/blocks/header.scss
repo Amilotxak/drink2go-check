@@ -1,5 +1,72 @@
 .header {
-  background-color: #663399;
-  color: #ffffff;
-  padding: 10px 15px;
+  display: flex;
+  height: 60px;
+}
+
+.header__logo {
+  margin: 12 auto 12 20;
+}
+
+.header__account {
+  width: 60px;
+  height: 60px;
+}
+
+.header__basket {
+  width: 60px;
+  height: 60px;
+}
+
+.header__toggle {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.header__button-closed .header__toggle__toggle::before {
+  content: "";
+  position: absolute;
+  top: 17px;
+  left: 13px;
+  width: 32px;
+  height: 2px;
+  background-color: #000000;
+  box-shadow:
+    0 10px 0 0 #000000,
+    0 20px 0 0 #000000;
+}
+
+.header__button-closed .header__toggle__toggle:active::before {
+  background-color: fade(#000000, 30%);
+  box-shadow:
+    0 6px 0 0 fade(#000000, 30%),
+    0 12px 0 0 fade(#000000, 30%);
+}
+
+.header__button-opened .header__toggle__toggle {
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    top: 25px;
+    left: 14px;
+    width: 32px;
+    height: 2px;
+    background-color: #000;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+    box-shadow: none;
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &:active::before,
+  &:active::after {
+    background-color: fade(#000000, 30%);
+  }
 }
