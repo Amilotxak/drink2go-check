@@ -1,46 +1,89 @@
 .header {
-  display: flex;
+  @include wrapper;
+  justify-content: center;
+  align-items: center;
   height: 60px;
+
+  @media (min-width: $tablet-width) {
+    width: 768px;
+    height: 80px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 1440px;
+  }
 }
 
 .header__logo {
   margin: 12 auto 12 20;
 }
 
-.header__account {
-  width: 60px;
+.header__logo-img {
+  @media (min-width: $tablet-width) {
+    width: 82px;
+    height: 36px;
+  }
+
+  @media (min-width: $desktop-width) {
+    width: 170px;
+    height: 36px;
+  }
+}
+
+.header__button-wrapper {
+  display: flex;
   height: 60px;
+
+  @media (min-width: $tablet-width) {
+    height: 80px;
+  }
+}
+
+.header__account {
+  @include button;
+  width: 60px;
+  background-image: url("/icons/navigation-user.svg");
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .header__basket {
+  @include button;
   width: 60px;
-  height: 60px;
+  background-image: url("/icons/navigation-basket.svg");
+  background-size: 16px 16px;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .header__toggle {
   position: relative;
   width: 60px;
-  height: 60px;
+  @include button;
+
+  @media (min-width: $tablet-width) {
+    display: none;
+  }
 }
 
 .header__button-closed .header__toggle__toggle::before {
   content: "";
   position: absolute;
-  top: 17px;
-  left: 13px;
-  width: 32px;
-  height: 2px;
-  background-color: #000000;
-  box-shadow:
-    0 10px 0 0 #000000,
-    0 20px 0 0 #000000;
+  background-color: #000;
+  width: 16px;
+  height: 1px;
+  position: absolute;
+  top: 25px;
+  left: 23px;
+  box-shadow: 0 5px #000, 0 10px #000;
 }
 
 .header__button-closed .header__toggle__toggle:active::before {
   background-color: fade(#000000, 30%);
   box-shadow:
-    0 6px 0 0 fade(#000000, 30%),
-    0 12px 0 0 fade(#000000, 30%);
+    0 5px 0 0 fade(#000000, 30%),
+    0 10px 0 0 fade(#000000, 30%);
 }
 
 .header__button-opened .header__toggle__toggle {
@@ -48,12 +91,12 @@
   &::before,
   &::after {
     content: "";
-    position: absolute;
-    top: 25px;
-    left: 14px;
-    width: 32px;
-    height: 2px;
     background-color: #000;
+    width: 16px;
+    height: 1px;
+    position: absolute;
+    top: 30px;
+    left: 22px;
   }
 
   &::before {
@@ -69,4 +112,66 @@
   &:active::after {
     background-color: fade(#000000, 30%);
   }
+}
+
+
+//
+
+.header__button-opened .header__toggle {
+
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    background-color: #000;
+    width: 20px;
+    height: 2px;
+    top: 29px;
+    left: 20px;
+  }
+
+  &::before {
+    transform: rotate(45deg);
+    box-shadow: none;
+  }
+
+  &::after {
+    transform: rotate(-45deg);
+  }
+
+  &:active::before,
+  &:active::after {
+    background-color: fade(#000000, 30%);
+  }
+}
+
+@media (max-width: $mobile-width-only) {
+  .header__button-closed .header__list {
+    display: none;
+  }
+
+  .header__button-nojs .header__toggle {
+    display: none;
+  }
+
+  .header__button-nojs .header__button-wrapper {
+    min-height: 0;
+  }
+
+  .header__button-nojs .header__list {
+    display: block;
+    position: relative;
+  }
+
+  .header__button-nojs .header__list-item {
+    display: block;
+    text-align: center;
+  }
+}
+
+.header__list {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  margin: 0 auto;
 }
